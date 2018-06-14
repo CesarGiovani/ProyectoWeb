@@ -39,7 +39,7 @@
 
 
 
-  <!--ella solo te ve coo amiga -->
+  <!--ella solo te ve como un gran amigo-->
 
 
 
