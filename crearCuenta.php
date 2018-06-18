@@ -10,7 +10,7 @@
 
 <body>
   <div class="container">
-    <form action="#" method="post">
+    <form action="insertarCuenta.php" method="post">
       <div class="row">
         <div class="col-25">
           <label for="nombre">Nombre(s)</label>
@@ -37,43 +37,48 @@
       </div>
       <div class="row">
         <div class="col-25">
-          <label for="edad">Edad De Nacimiento</label>
+          <label for="tel">Telefono</label>
         </div>
         <div class="col-75">
-          <input type="text" id="dia" name="dia" placeholder="Ingrese Dia.." required>
-        </div>
-        <div class="col-75">
-          <input type="text" id="mes" name="mes" placeholder="Ingrese Mes.." required>
+          <input type="text" id="tel" name="tel" placeholder="Ingrese Telefono.." required>
         </div>
       </div>
       <div class="row">
         <div class="col-25">
-          <label for=""></label>
+          <label for="puesto">Puesto</label>
         </div>
         <div class="col-75">
-          <input type="text" id="anio" name="anio" placeholder="Ingrese Año.." required>
+          <select class="" name="cmbpuesto" size="1">
+            <option value="0"> -- Puesto -- </option>
+            <?php
+                include("conexion.php");
+               $consulta = "SELECT * FROM puesto";
+               $ejectConsulta = mysqli_query($coneta,$consulta);
+               while ($puesto=mysqli_fetch_assoc($ejectConsulta)) {
+                 # code...
+                 echo "<option value='".$puesto['IdPuesto']."'>".$puesto['Descripcion']."</option>";
+               }
+             ?>
+          </select>
         </div>
       </div>
       <div class="row">
         <div class="col-25">
-          <label for="country">Country</label>
+          <label for="correo">Correo</label>
         </div>
         <div class="col-75">
-          <select id="country" name="country">
-             <option value="australia">Australia</option>
-             <option value="canada">Canada</option>
-             <option value="usa">USA</option>
-           </select>
+          <input type="text" id="Correo" name="Correo" placeholder="Ingrese correo.." required>
         </div>
       </div>
       <div class="row">
         <div class="col-25">
-          <label for="subject">Subject</label>
+          <label for="contra">Contraseña</label>
         </div>
         <div class="col-75">
-          <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+          <input type="password" id="contra" name="contra" placeholder="Contraseña.." required>
         </div>
       </div>
+      <br>
       <div class="row">
         <input type="submit" value="Submit">
       </div>
