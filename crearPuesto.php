@@ -22,20 +22,19 @@
     <input class="button button4" type="submit" value="Guardar">
     <input class="button button4" type="reset" value="Nuevo">
     <br><br>
-</body>
-<?php
+    <?php
   include("conexion.php");//funcion que permite la integracion de otro documento
   $query="SELECT * FROM puesto;";
   $ejectQuery= mysqli_query($coneta,$query);
    ?>
-  <div style="overflow-x:auto;">
-    <table class="table" border="1" id="customers">
-      <tr>
-        <th>No.Puesto</th>
-        <th>Puesto</th>
-        <th>Actualizar</th>
-        <th>Borrar</th>
-        <?php
+      <div style="overflow-x:auto;">
+        <table class="table" border="1" id="customers">
+          <tr>
+            <th>No.Puesto</th>
+            <th>Puesto</th>
+            <th>Actualizar</th>
+            <th>Borrar</th>
+            <?php
        while ($pues=mysqli_fetch_assoc($ejectQuery)) {//el fetch assoc te manda un true si hay datos
          echo "<tr><td>".$pues["IdPuesto"]."</td><td>".$pues["Descripcion"].
          "</td><td><a href='actualizarPuesto.php?IdPuesto=".$pues['IdPuesto']."'>
@@ -45,11 +44,11 @@
        }
        mysqli_close($coneta);
         ?>
-      </tr>
-    </table>
-  </div>
+          </tr>
+        </table>
+      </div>
   </form>
 
-  </body>
+</body>
 
 </html>

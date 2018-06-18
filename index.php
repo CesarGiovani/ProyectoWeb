@@ -5,8 +5,9 @@
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="css/loader.css">
   <link rel="stylesheet" type="text/css" href="css/cuenta.css">
+  <link rel="stylesheet" type="text/css" href="css/radio.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+  <title>Inicio</title>
 </head>
 
 <body onload="myFunction()" style="margin:0;">
@@ -17,7 +18,7 @@
     <div class="header">
       <a href="#default" class="logo">Reporte Jilotepequense</a>
       <div class="header-right">
-        <a class="active" href="#home">Iniciar Sesion</a>
+        <a class="active" href="login.php">Iniciar Sesion</a>
         <a href="#contact">Busqueda De Folio</a>
         <a href="#about">About</a>
       </div>
@@ -125,8 +126,7 @@
 
         <h3>Datos del solicitante</h3>
         <hr class="red">
-        <p>Sus datos personales se encuentran protegidos en términos de lo señalado por las leyes y demás
-                                disposiciones aplicables en materia de Transparencia y Protección de Datos Personales</p>
+        <p>Sus datos personales se encuentran protegidos en términos de lo señalado por las leyes y demás disposiciones aplicables en materia de Transparencia y Protección de Datos Personales</p>
 
       </div>
       <form action="#" method="post">
@@ -159,7 +159,7 @@
             <label for="aMat">Edad</label>
           </div>
           <div class="col-75">
-            <input id="Edad" type="number" name="Edad" placeholder="Edad" max="800" min="5" required>
+            <input id="Edad" type="number" name="Edad" placeholder="Edad" max="100" min="5" required>
           </div>
         </div>
         <div class="row">
@@ -167,11 +167,13 @@
             <label for="aMat">Sexo</label>
           </div>
           <div class="col-75">
-            <label class="radio-inline">
-                  <input id="male" name="gender" ng-model="pet.ciudadano.genero" value="HOMBRE" class="ng-pristine ng-untouched ng-valid ng-empty" type="radio"> Hombre
+            <label class="container2">
+                  <input id="male" name="gender" checked="" value="HOMBRE" type="radio"> Hombre
+                  <span class="checkmark"></span>
               </label>
-            <label class="radio-inline">
-                  <input id="female" name="gender" ng-model="pet.ciudadano.genero" value="MUJER" class="ng-pristine ng-untouched ng-valid ng-empty" type="radio"> Mujer
+            <label class="container2">
+                  <input id="female" name="gender" value="MUJER" type="radio"> Mujer
+                  <span class="checkmark"></span>
               </label>
           </div>
         </div>
