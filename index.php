@@ -16,14 +16,13 @@
   <div style="display:none;" id="myDiv" class="animate-bottom">
     <!--Aqui empiza lo demas -->
     <div class="header">
-      <a href="#default" class="logo">Reporte Jilotepequense</a>
+      <a href="index.php" class="logo">Reporte Jilotepequense</a>
       <div class="header-right">
         <a class="active" href="login.php">Iniciar Sesion</a>
         <a href="#contact">Busqueda De Folio</a>
         <a href="#about">About</a>
       </div>
     </div>
-
 
 
     <div class="container">
@@ -113,7 +112,7 @@
 
       <div class="row">
         <div class="col-25">
-          <label for="nombre">Subir archivo:</label>
+          <label for="nombre">Subir Evidencia:</label>
         </div>
         <div class="col-75">
           <input id="fileUpload_input" name="fileUpload_input" file-upload="" multiple="" class="ng-scope" type="file">
@@ -195,7 +194,7 @@
         </div>
         <div class="row">
           <div class="col-25">
-            <label for="nombre">Subir archivo:</label>
+            <label for="nombre">Subir Foto Personal:</label>
           </div>
           <div class="col-75">
             <input id="fileUpload_input" name="fileUpload_input" file-upload="" multiple="" class="ng-scope" type="file">

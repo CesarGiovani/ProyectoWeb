@@ -10,7 +10,7 @@
 
 <body>
   <div class="container">
-    <form action="insertarCuenta.php" method="post">
+    <form action="crearCuenta.php" method="post">
       <div class="row">
         <div class="col-25">
           <label for="nombre">Nombre(s)</label>
@@ -49,7 +49,7 @@
         </div>
         <div class="col-75">
           <select class="" name="cmbpuesto" size="1">
-            <option value="0"> -- Puesto -- </option>
+            <option value="0">-- Puesto --</option>
             <?php
                 include("conexion.php");
                $consulta = "SELECT * FROM puesto";
@@ -80,9 +80,44 @@
       </div>
       <br>
       <div class="row">
-        <input type="submit" value="Submit">
+        <input type="submit" value="Crear">
       </div>
     </form>
+    <?php
+    @$nombre = $_POST["nombre"];
+    @$apePat = $_POST["aPat"];
+    @$apeMat = $_POST["aMat"];
+    @$telefono = $_POST["tel"];
+    @$idPuesto = $_POST["cmbpuesto"];
+    @$correo = base64_encode($_POST["Correo"]);
+    //@$encripUsuario = base64_encode($usuario);
+    @$contra = sha1($_POST["contra"]);
+    //@$encripContra = md5($contra);
+    if(isset($nombre) && isset($contra)){
+    	if($idPuesto == 0 ){
+    		echo "<h1>Olvido Seleccionar El Puesto</h1>";
+    	}elseif($contra == NULL){
+    		echo "El campo contraseña no debe estar vacio";
+    	}else
+    	{
+    	include('conexion.php');
+        //echo $rutaArch;
+    		$sql = "INSERT  usuario  VALUES
+        (NULL, '$nombre', '$apePat', '$apeMat', '$telefono',
+          '$idPuesto', '$correo', '$contra')";
+    		if(mysqli_query($coneta,$sql)){
+    			echo "Usuario Registrado correctamente <br>";
+          echo " <a type='button' name='button' href='login.php' style='color:dodgerblue'
+          >Regresar
+          <span title='Ver Reporte'><img src='img/back.ico'></span></a>";
+    			//mueve el archivo a la ruta de imagenes/imgUsuario
+    		}else{
+    			echo "Problemas al Registrar";
+    		}
+    		mysqli_close($coneta);
+    	}
+    }
+    ?>
   </div>
 </body>
 

@@ -1,3 +1,29 @@
+<?php
+@$user = base64_encode($_POST['email']);
+@$pass = sha1($_POST['psw']);
+
+if(isset($user) && isset($pass) && isset($tipo)){
+	include("conexion.php");
+	$sql = "SELECT * FROM usuario
+	        WHERE User = '$user'
+			AND Password = '$pass'";
+	$ejecSQL = mysqli_query($coneta,$sql);
+	while($extraer = mysqli_fetch_assoc($ejecSQL)){
+		$extUser = $extraer['User'];
+		$extPass = $extraer['Password'];
+		$extCargo = $extraer['idCargo'];
+		$extFoto = $extraer['foto'];
+	}
+	if(($user == $extUser) && ($pass == $extPass) && ($tipo == $extCargo)){
+		session_start();
+		$_SESSION["User"] = base64_decode($extUser);
+		$_SESSION["foto"] = $extFoto;
+		header("location:index.php");
+	}else{
+		echo "Datos incorrectos, intente de nuevo";
+	}
+}
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
