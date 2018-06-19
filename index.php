@@ -1,3 +1,6 @@
+<?php
+session_start();
+ ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -14,6 +17,10 @@
   <div id="loader"></div>
 
   <div style="display:none;" id="myDiv" class="animate-bottom">
+    <?php
+    if ((@$_SESSION['Nombre']== NULL)) {
+        if (@$_SESSION['Descripcion'] == NULL ) {
+          ?>
     <!--Aqui empiza lo demas -->
     <div class="header">
       <a href="index.php" class="logo">Reporte Jilotepequense</a>
@@ -24,23 +31,23 @@
       </div>
     </div>
 
-
-    <div class="container">
-      <h1>Registrar Denuncia</h1>
-      <div class="row">
-        <div class="col-25">
-          <label for="subject">Denuncia</label>
+    <form action="insetarDemandante.php" method="post">
+      <div class="container">
+        <h1>Registrar Denuncia</h1>
+        <div class="row">
+          <div class="col-25">
+            <label for="subject">Denuncia</label>
+          </div>
+          <div class="col-75">
+            <textarea id="subject" name="subject" placeholder="Narre el motivo de su denuncia.." style="height:200px"></textarea>
+          </div>
         </div>
-        <div class="col-75">
-          <textarea id="subject" name="subject" placeholder="Narre el motivo de su denuncia.." style="height:200px"></textarea>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="aMat">Departamento</label>
-        </div>
-        <div class="col-75">
-          <select class="" name="Departamento" size="1">
+        <div class="row">
+          <div class="col-25">
+            <label for="aMat">Departamento</label>
+          </div>
+          <div class="col-75">
+            <select class="" name="Departamento" size="1">
                 <option value="0"> -- Departamento -- </option>
                 <?php
                     include("conexion.php");
@@ -52,33 +59,14 @@
                    }
                  ?>
               </select>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="aMat">Denunciante </label>
-        </div>
-        <div class="col-75">
-          <select class="" name="denunciante" size="1">
-                <option value="0"> -- Denunciante -- </option>
-                <?php
-                    include("conexion.php");
-                   $consulta = "SELECT denunciante.IdDenunciante, concat (denunciante.Nombre,' ', denunciante.ApellidoPa,' ', denunciante.ApellidoMa) as nombre FROM denunciante ";
-                   $ejectConsulta = mysqli_query($coneta,$consulta);
-                   while ($puesto=mysqli_fetch_assoc($ejectConsulta)) {
-                     # code...
-                     echo "<option value='".$puesto['IdDenunciante']."'>".$puesto['nombre']."</option>";
-                   }
-                 ?>
-              </select>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="aMat">Ubicacion</label>
-        </div>
-        <div class="col-75">
-          <select class="" name="Ubicacion" size="1">
+        <div class="row">
+          <div class="col-25">
+            <label for="aMat">Ubicacion</label>
+          </div>
+          <div class="col-75">
+            <select class="" name="Ubicacion" size="1">
                 <option value="0"> -- Ubicacion -- </option>
                 <?php
                     include("conexion.php");
@@ -90,45 +78,45 @@
                    }
                  ?>
               </select>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="Calle">Calle</label>
+        <div class="row">
+          <div class="col-25">
+            <label for="Calle">Calle</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="Calle" name="Calle" placeholder="Ingrese Calle(s).." required>
+          </div>
         </div>
-        <div class="col-75">
-          <input type="text" id="Calle" name="Calle" placeholder="Ingrese Calle(s).." required>
+        <div class="row">
+          <div class="col-25">
+            <label for="Calle">Numero</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="Numero" name="Numero" placeholder="Ingrese Numero(s).." required>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="Calle">Numero</label>
-        </div>
-        <div class="col-75">
-          <input type="text" id="Numero" name="Numero" placeholder="Ingrese Numero(s).." required>
-        </div>
-      </div>
 
 
-      <div class="row">
-        <div class="col-25">
-          <label for="nombre">Subir Evidencia:</label>
+        <div class="row">
+          <div class="col-25">
+            <label for="nombre">Subir Evidencia:</label>
+          </div>
+          <div class="col-75">
+            <input type="file" name="foto">
+          </div>
         </div>
-        <div class="col-75">
-          <input id="fileUpload_input" name="fileUpload_input" file-upload="" multiple="" class="ng-scope" type="file">
+
+        <!--Es servidor público?-->
+
+        <div class="row col-md-12">
+
+          <h3>Datos del solicitante</h3>
+          <hr class="red">
+          <p>Sus datos personales se encuentran protegidos en términos de lo señalado por las leyes y demás disposiciones aplicables en materia de Transparencia y Protección de Datos Personales</p>
+
         </div>
-      </div>
 
-      <!--Es servidor público?-->
-
-      <div class="row col-md-12">
-
-        <h3>Datos del solicitante</h3>
-        <hr class="red">
-        <p>Sus datos personales se encuentran protegidos en términos de lo señalado por las leyes y demás disposiciones aplicables en materia de Transparencia y Protección de Datos Personales</p>
-
-      </div>
-      <form action="#" method="post">
         <div class="row">
           <div class="col-25">
             <label for="nombre">Nombre(s)</label>
@@ -167,11 +155,11 @@
           </div>
           <div class="col-75">
             <label class="container2">
-                  <input id="male" name="gender" checked="" value="HOMBRE" type="radio"> Hombre
+                  <input id="male" name="gender" checked="" value="Hombre" type="radio"> Hombre
                   <span class="checkmark"></span>
               </label>
             <label class="container2">
-                  <input id="female" name="gender" value="MUJER" type="radio"> Mujer
+                  <input id="female" name="gender" value="Mujer" type="radio"> Mujer
                   <span class="checkmark"></span>
               </label>
           </div>
@@ -197,16 +185,21 @@
             <label for="nombre">Subir Foto Personal:</label>
           </div>
           <div class="col-75">
-            <input id="fileUpload_input" name="fileUpload_input" file-upload="" multiple="" class="ng-scope" type="file">
+            <input id="fileUpload" name="fileUpload" file-upload="" multiple="" class="ng-scope" type="file">
           </div>
         </div>
         <br>
         <div class="row">
-          <input type="submit" value="Submit">
+          <input type="submit" value="Reportar">
         </div>
-      </form>
+    </form>
     </div>
-
+    <?php
+  }
+  }else {
+  header("location:reportes.php");
+  }
+     ?>
 
     <!--Aqui termina el loader-->
   </div>
@@ -214,7 +207,7 @@
     var myVar;
 
     function myFunction() {
-      myVar = setTimeout(showPage, 1000);
+      myVar = setTimeout(showPage, 3000);
     }
 
     function showPage() {

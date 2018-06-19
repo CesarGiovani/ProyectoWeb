@@ -1,26 +1,25 @@
 <?php
-@$user = base64_encode($_POST['email']);
+@$corr = base64_encode($_POST['email']);
 @$pass = sha1($_POST['psw']);
 
-if(isset($user) && isset($pass) && isset($tipo)){
+if(isset($corr) && isset($pass)){
 	include("conexion.php");
-	$sql = "SELECT * FROM usuario
-	        WHERE User = '$user'
-			AND Password = '$pass'";
+	$sql = "SELECT U.Nombre, U.correo, U.contrasena, D.Descripcion FROM
+usuario AS U JOIN departamento AS D ON U.IdUsuario = D.IdUsuario WHERE correo = '$corr' AND U.contrasena = '$pass'";
 	$ejecSQL = mysqli_query($coneta,$sql);
 	while($extraer = mysqli_fetch_assoc($ejecSQL)){
-		$extUser = $extraer['User'];
-		$extPass = $extraer['Password'];
-		$extCargo = $extraer['idCargo'];
-		$extFoto = $extraer['foto'];
+		$extName = $extraer['Nombre'];
+		$extCorr = $extraer['correo'];
+		$extPass = $extraer['contrasena'];
+		$extDep = $extraer['Descripcion'];
 	}
-	if(($user == $extUser) && ($pass == $extPass) && ($tipo == $extCargo)){
+	if(($corr == @$extCorr) && ($pass == @$extPass)){
 		session_start();
-		$_SESSION["User"] = base64_decode($extUser);
-		$_SESSION["foto"] = $extFoto;
-		header("location:index.php");
+		$_SESSION['Nombre'] = $extName;
+		$_SESSION['Descripcion'] = $extDep;
+		header("location:reportes.php");
 	}else{
-		echo "Datos incorrectos, intente de nuevo";
+		echo "<h1>Datos incorrectos, intente de nuevo</h1>";
 	}
 }
 ?>
@@ -36,7 +35,7 @@ if(isset($user) && isset($pass) && isset($tipo)){
 
 <body>
   <div class="bg-img">
-    <form action="#" method="post">
+    <form action="login.php" method="post">
       <div class="container">
         <h1>Iniciar Sesion</h1>
         <label for="email"><b>Email</b></label>

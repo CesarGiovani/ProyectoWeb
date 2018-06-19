@@ -102,6 +102,11 @@
   color: white;
 }
 
+.header a.activeC {
+  background-color: rgb(182, 63, 63);
+  color: white;
+}
+
 /* Float the link section to the right */
 .header-right {
   float: right;

@@ -7,16 +7,33 @@ session_start();
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="css/reportes.css">
+    <link rel="stylesheet" type="text/css" href="css/loader.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Reportes</title>
   </head>
+
   <body>
     <?php
+    $Cargo = $_SESSION['Descripcion'];
+    if (isset($_SESSION['Nombre'])) {
+        if ($_SESSION['Descripcion'] != NULL ) {
+          ?>
+          <div class="header">
+            <a href="reportes.php" class="logo"><?php echo "$Cargo"; ?></a>
+            <p>Bienvenido <?php echo $_SESSION['Nombre']; ?></p>
+            <div class="header-right">
+              <a class="activeC" href="cerrarSesion.php">Cerrar Sesion</a>
+            </div>
+          </div>
+    <?php
       include("conexion.php");
-      $query="SELECT denunciante.IdDenunciante AS ID, CONCAT(denunciante.Nombre,' ',denunciante.ApellidoPa,
+      $query="SELECT reporte.IdReporte, CONCAT(denunciante.Nombre,' ',denunciante.ApellidoPa,
 ' ',denunciante.ApellidoMa) AS Nombre, denunciante.sexo As Sexo,
 denunciante.telefono As Telefono, denunciante.correo AS Correo,
-denunciante.imagen AS Perfil FROM denunciante;";
+denunciante.imagen AS Perfil, departamento.Descripcion FROM reporte
+INNER JOIN denunciante ON reporte.IdDenunciante = denunciante.IdDenunciante
+INNER JOIN departamento ON reporte.IdDepartamento = departamento.IdDepertamento
+WHERE departamento.Descripcion = '".$Cargo."' AND reporte.`status` = 1";
       $ejectQuery= mysqli_query($coneta,$query);
       while ($rep=mysqli_fetch_assoc($ejectQuery)) {
         echo "<div class='container'>
@@ -24,19 +41,16 @@ denunciante.imagen AS Perfil FROM denunciante;";
           <p><span>".$rep["Nombre"].".</span><span>".$rep["Telefono"].".</span>
            <span>".$rep["Sexo"].".</span></p>
           <p>".$rep["Correo"]."</p>
-          <a href='borraPuesto.php?IDDenuncia=".$rep['ID']."'>
+          <a href='borraPuesto.php?IdReporte=".$rep['IdReporte']."'>
           <span title='Ver Reporte'><img src='img/ver.ico'></span></a>
         </div>";
       }
       mysqli_close($coneta);
+    }
+  }else {
+    echo "Acceso denegado >:v, <a href='login.php'>Iniciar Sesion</a>";
+}
     ?>
-      <!--
-    <div class="container">
-      <img src="img/mx.jpg" alt="Avatar" style="width:90px">
-      <p><span>Chris Fox.</span> CEO at Mighty Schools.</p>
-      <p>John Doe saved us from a web disaster.</p>
-    </div>-->
-
   </body>
 
   </html>
