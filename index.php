@@ -97,7 +97,7 @@ session_start();
           </div>
         </div>
 
-
+<!--
         <div class="row">
           <div class="col-25">
             <label for="nombre">Subir Evidencia:</label>
@@ -106,7 +106,7 @@ session_start();
             <input type="file" name="foto">
           </div>
         </div>
-
+-->
         <!--Es servidor público?-->
 
         <div class="row col-md-12">
@@ -180,6 +180,7 @@ session_start();
             <input type="text" id="Correo" name="Correo" placeholder="Correo.." required>
           </div>
         </div>
+        <!--
         <div class="row">
           <div class="col-25">
             <label for="nombre">Subir Foto Personal:</label>
@@ -188,6 +189,7 @@ session_start();
             <input id="fileUpload" name="fileUpload" file-upload="" multiple="" class="ng-scope" type="file">
           </div>
         </div>
+      -->
         <br>
         <div class="row">
           <input type="submit" value="Reportar">

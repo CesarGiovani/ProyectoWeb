@@ -41,7 +41,7 @@ WHERE departamento.Descripcion = '".$Cargo."' AND reporte.`status` = 1";
           <p><span>".$rep["Nombre"].".</span><span>".$rep["Telefono"].".</span>
            <span>".$rep["Sexo"].".</span></p>
           <p>".$rep["Correo"]."</p>
-          <a href='borraPuesto.php?IdReporte=".$rep['IdReporte']."'>
+          <a href='reporteDenuncias.php?IdReporte=".$rep['IdReporte']."'>
           <span title='Ver Reporte'><img src='img/ver.ico'></span></a>
         </div>";
       }

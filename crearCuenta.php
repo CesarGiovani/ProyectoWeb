@@ -1,3 +1,6 @@
+<?php
+session_start();
+ ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -9,6 +12,11 @@
 </head>
 
 <body>
+  <?php
+  @$Cargo = $_SESSION['Descripcion'];
+  if (isset($_SESSION['Nombre'])) {
+      if ($_SESSION['Descripcion'] != 'Admistrador' ) {
+        ?>
   <div class="container">
     <form action="crearCuenta.php" method="post">
       <div class="row">
@@ -117,7 +125,14 @@
     		mysqli_close($coneta);
     	}
     }
+
     ?>
+    <?php
+  }
+}else {
+  echo "<h1>Solo el Admistrador crea cuentas <a href='login.php'>Iniciar Sesion</a></h1>";
+}
+     ?>
   </div>
 </body>
 
